@@ -1,0 +1,8 @@
+pipelines:
+  default:
+    - step:
+        script:
+          - echo "SP Code Analysis Check started!"
+          - curl --insecure -OL https://s3-us-west-1.amazonaws.com/sp-utilities/sp-scanner-cli-new.zip
+          - unzip sp-scanner-cli-new.zip
+          - ./sp-scanner-cli-new/bin/sp-scanner -Dsonar.host.url=https://qualitygateway.successpanda.com/ -Dsonar.login=94eea5e4e53a232aedadf606af7436a8479318b6 -Dsonar.branch=$BITBUCKET_BRANCH -Dsonar.sources=$BITBUCKET_CLONE_DIR/. -Dsonar.analysis.mode=publish -Dsonar.projectKey=Cooking_recipe_portal -Dsonar.projectName=Cooking_recipe_portal -Dsonar.java.binaries=.
